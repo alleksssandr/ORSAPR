@@ -1,0 +1,330 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using System.Windows.Forms;
+
+using Autodesk.AutoCAD.Runtime;
+using Autodesk.AutoCAD.ApplicationServices;
+using Autodesk.AutoCAD.DatabaseServices;
+using Autodesk.AutoCAD.Geometry;
+using Autodesk.AutoCAD.EditorInput;
+
+namespace Motor
+{
+    public class Class1 : IExtensionApplication
+
+    {
+
+        // функция инициализации (выполняется при загрузке плагина)
+        public void Initialize()
+        {
+            GUI form = new GUI();
+            form.ShowDialog();
+        }
+
+        // функция, выполняемая при выгрузке плагина
+        public void Terminate()
+        {
+            MessageBox.Show("Goodbye!");
+        }
+
+        // эта функция будет вызываться при выполнении в AutoCAD команды «habr»
+        [CommandMethod("mycommand")]
+        public void MyCommand()
+        {
+            GUI form = new GUI();
+            form.ShowDialog();
+        }
+
+
+        public void Motor(double LenBox, double DiameretBox, double LenRotor, double DiameretRotor, double LenPin, 
+            double WidthFindings, double LenFindings, double HeightFindings, double DiameretPorts, int CountPorts)
+        {
+            // Get the current document and database, and start a transaction
+            Document acDoc = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument;
+            Database acCurDb = acDoc.Database;
+
+            using (Transaction acTrans = acCurDb.TransactionManager.StartTransaction())
+            {
+                // Open the Block table record for read
+                BlockTable acBlkTbl;
+                acBlkTbl = acTrans.GetObject(acCurDb.BlockTableId,
+                OpenMode.ForRead) as BlockTable;
+
+                // Open the Block table record Model space for write
+                BlockTableRecord acBlkTblRec;
+                acBlkTblRec = acTrans.GetObject(acBlkTbl[BlockTableRecord.ModelSpace],
+                OpenMode.ForWrite) as BlockTableRecord;
+
+//КОРПУС//////////////////////////////////////////////////////////////////////////////////////////////////////
+//BOX
+                // Create a 3D solid cylinder
+                // 3D solids are created at (0,0,0) so there is no need to move it
+                Solid3d Box = new Solid3d();
+                Box.SetDatabaseDefaults();
+                Box.CreateFrustum(LenBox, DiameretBox / 2, DiameretBox / 2, DiameretBox / 2);
+                Box.ColorIndex = 4;
+
+                // Add the new object to the block table record and the transaction
+                acBlkTblRec.AppendEntity(Box);
+                acTrans.AddNewlyCreatedDBObject(Box, true);
+
+
+                ObjectId[] ids = new ObjectId[] { Box.ObjectId };
+
+                SubentityId subentId = new SubentityId(
+                SubentityType.Null, IntPtr.Zero);
+
+                FullSubentityPath path = new FullSubentityPath(ids, subentId);
+
+                List<SubentityId> subentIds = new List<SubentityId>();
+                DoubleCollection radii = new DoubleCollection();
+                DoubleCollection startSetback = new DoubleCollection();
+                DoubleCollection endSetback = new DoubleCollection();
+
+                using (Autodesk.AutoCAD.BoundaryRepresentation.Brep brep = new Autodesk.AutoCAD.BoundaryRepresentation.Brep(path))
+                {
+                    foreach (Autodesk.AutoCAD.BoundaryRepresentation.Edge
+                    edge in brep.Edges)
+                    {
+
+                        if (edge.Vertex1.Point.Z == -LenBox / 2)
+                        {
+                            subentIds.Add(edge.SubentityPath.SubentId);
+                            radii.Add(60.0);
+
+                            // Setback fillets. Defines a setback distance
+                            // from a vertex at which the fillets start to blend
+                            startSetback.Add(0.0);
+                            endSetback.Add(15.0);
+                        }
+                        if (edge.Vertex1.Point.Z == LenBox / 2)
+                        {
+                            subentIds.Add(edge.SubentityPath.SubentId);
+                            radii.Add(15.0);
+
+                            startSetback.Add(0.0);
+                            endSetback.Add(15.0);
+                        }
+                    }
+                }
+
+                Box.FilletEdges(subentIds.ToArray(), radii, startSetback, endSetback);
+
+                // Position the center of the 3D solid at (5,5,0) 
+                Box.TransformBy(Matrix3d.Displacement(new Point3d(0, 0, 0) -Point3d.Origin));
+
+                //Rotate
+                Vector3d vRot = new Point3d(0, 0, 0).GetVectorTo(new Point3d(1, 0, 0));
+                Box.TransformBy(Matrix3d.Rotation(1.57, vRot, new Point3d(0, 0, 0)));
+
+
+
+//////////////////////////////
+//ЛАПА 1
+
+                // Create a 3D solid box
+                Solid3d Paw1 = new Solid3d();
+                Paw1.SetDatabaseDefaults();
+                Paw1.CreateBox(DiameretBox / 4, LenBox , 20);
+                Paw1.ColorIndex = 7;
+
+                // Position the center of the 3D solid at (5,5,0) 
+                Paw1.TransformBy(Matrix3d.Displacement(new Point3d(DiameretBox/2, 0, -DiameretBox/2) -Point3d.Origin));
+
+                // Add the new object to the block table record and the transaction
+                acBlkTblRec.AppendEntity(Paw1);
+                acTrans.AddNewlyCreatedDBObject(Paw1, true);
+
+//////
+
+                // Create a 3D solid box
+                Solid3d Paw11 = new Solid3d();
+                Paw11.SetDatabaseDefaults();
+                Paw11.CreateBox(0.9 * DiameretBox / 4,LenBox*0.8 , 20);
+                Paw11.ColorIndex = 7;
+
+
+                double R = DiameretBox / 2;
+                double koord = (R * ((Math.Sqrt(2) - 1) / 2) + R) / Math.Sqrt(2);
+
+                // Position the center of the 3D solid at (5,5,0) 
+                Paw11.TransformBy(Matrix3d.Displacement(new Point3d(koord, 0, -koord) - Point3d.Origin));
+
+                //Rotate
+                Vector3d vRotPaw = new Point3d(0, 0, 0).GetVectorTo(new Point3d(0, 1, 0));
+                Paw11.TransformBy(Matrix3d.Rotation(0.785, vRotPaw, new Point3d(koord, 0, -koord)));
+
+                // Add the new object to the block table record and the transaction
+                acBlkTblRec.AppendEntity(Paw11);
+                acTrans.AddNewlyCreatedDBObject(Paw11, true);
+
+
+//////////////////////////////
+//ЛАПА 2
+
+                // Create a 3D solid box
+                Solid3d Paw2 = new Solid3d();
+                Paw2.SetDatabaseDefaults();
+                Paw2.CreateBox(DiameretBox / 4, LenBox, 20);
+                Paw2.ColorIndex = 7;
+
+                // Position the center of the 3D solid at (5,5,0) 
+                Paw2.TransformBy(Matrix3d.Displacement(new Point3d(-DiameretBox / 2, 0, -DiameretBox / 2) - Point3d.Origin));
+
+                // Add the new object to the block table record and the transaction
+                acBlkTblRec.AppendEntity(Paw2);
+                acTrans.AddNewlyCreatedDBObject(Paw2, true);
+
+//////
+
+                // Create a 3D solid box
+                Solid3d Paw22 = new Solid3d();
+                Paw22.SetDatabaseDefaults();
+                Paw22.CreateBox(0.9 * DiameretBox / 4, LenBox * 0.8, 20);
+                Paw22.ColorIndex = 7;
+
+                // Position the center of the 3D solid at (5,5,0) 
+                Paw22.TransformBy(Matrix3d.Displacement(new Point3d(-koord, 0, -koord) - Point3d.Origin));
+
+                //Rotate
+                //Vector3d vRotPaw = new Point3d(0, 0, 0).GetVectorTo(new Point3d(0, 1, 0));
+                Paw22.TransformBy(Matrix3d.Rotation(-0.785, vRotPaw, new Point3d(-koord, 0, -koord)));
+
+                // Add the new object to the block table record and the transaction
+                acBlkTblRec.AppendEntity(Paw22);
+                acTrans.AddNewlyCreatedDBObject(Paw22, true);
+
+
+//РОТОР////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Rotor
+
+                // Create a 3D solid cylinder
+                // 3D solids are created at (0,0,0) so there is no need to move it
+                Solid3d Rotor = new Solid3d();
+                Rotor.SetDatabaseDefaults();
+                Rotor.CreateFrustum(LenRotor, DiameretRotor / 2, DiameretRotor / 2, DiameretRotor / 2);
+                Rotor.ColorIndex = 4;
+
+                // Position the center of the 3D solid at (5,5,0) 
+                Rotor.TransformBy(Matrix3d.Displacement(new Point3d(0, -LenRotor/2-LenBox/2, 0) - Point3d.Origin));
+
+                //Rotate
+                Vector3d vRotRotor = new Point3d(0, 0, 0).GetVectorTo(new Point3d(1, 0, 0));
+                Rotor.TransformBy(Matrix3d.Rotation(1.57, vRot, new Point3d(0, -LenRotor / 2 - LenBox / 2, 0)));
+
+                // Add the new object to the block table record and the transaction
+                acBlkTblRec.AppendEntity(Rotor);
+                acTrans.AddNewlyCreatedDBObject(Rotor, true);
+
+//PIN//////
+
+                // Create a 3D solid box
+                Solid3d Pin = new Solid3d();
+                Pin.SetDatabaseDefaults();
+                Pin.CreateBox(DiameretRotor/10, LenPin,DiameretRotor/10 );
+                Pin.ColorIndex = 7;
+
+                // Position the center of the 3D solid at (5,5,0) 
+                Pin.TransformBy(Matrix3d.Displacement(new Point3d(0, - LenBox/ 2 -LenRotor +LenPin/2, DiameretRotor/2) - Point3d.Origin));
+
+                // Add the new object to the block table record and the transaction
+                acBlkTblRec.AppendEntity(Pin);
+                acTrans.AddNewlyCreatedDBObject(Pin, true);
+
+//КОРОБКА ВЫВОДОВ/////////////////////////////////////////////////////////////////////////////////////////////////////
+//Findings
+
+
+                // Create a 3D solid box
+                Solid3d Findings = new Solid3d();
+                Findings.SetDatabaseDefaults();
+                Findings.CreateBox(WidthFindings, LenFindings, HeightFindings);
+                Findings.ColorIndex = 7;
+
+                // Position the center of the 3D solid at (5,5,0) 
+                Findings.TransformBy(Matrix3d.Displacement(new Point3d(0, -LenBox / 2 + 1.2*LenFindings / 2, DiameretBox / 2 + HeightFindings/2-0.1*HeightFindings) - Point3d.Origin));
+
+                // Add the new object to the block table record and the transaction
+                acBlkTblRec.AppendEntity(Findings);
+                acTrans.AddNewlyCreatedDBObject(Findings, true);
+
+                // Create a 3D solid box
+                Solid3d Cavity = new Solid3d();
+                Cavity.SetDatabaseDefaults();
+                Cavity.CreateBox(WidthFindings*0.8, LenFindings*0.9, HeightFindings*0.8);
+
+                // Position the center of the 3D solid at (5,5,0) 
+                Cavity.TransformBy(Matrix3d.Displacement(new Point3d(0, -LenBox / 2 + 1.2 * LenFindings / 2, DiameretBox / 2 + HeightFindings / 2 - 0.1 * HeightFindings) - Point3d.Origin));
+
+                // Add the new object to the block table record and the transaction
+                acBlkTblRec.AppendEntity(Cavity);
+                acTrans.AddNewlyCreatedDBObject(Cavity, true);
+
+                Findings.BooleanOperation(BooleanOperationType.BoolSubtract,Cavity);
+
+//port////
+                
+
+
+                // Create a 3D solid cylinder
+                // 3D solids are created at (0,0,0) so there is no need to move it
+                
+
+                Vector3d vRotPort = new Point3d(0, 0, 0).GetVectorTo(new Point3d(0, 1, 0));
+                if (CountPorts>=1)
+                {
+                    Solid3d Port = new Solid3d();
+                    Port.SetDatabaseDefaults();
+                    Port.CreateFrustum(LenFindings*CountPorts, DiameretPorts / 2, DiameretPorts / 2, DiameretPorts / 2);
+                    Port.ColorIndex = 4;
+                    Port.TransformBy(Matrix3d.Displacement(new Point3d(0, -LenBox / 2 + (1.4 * LenFindings / 6), DiameretBox / 2 + HeightFindings / 2 - 0.1 * HeightFindings) - Point3d.Origin));
+                    Port.TransformBy(Matrix3d.Rotation(1.57, vRotPort, new Point3d(0, -LenBox / 2 + 1.6 * LenFindings / 3 / 2, DiameretBox / 2 + HeightFindings / 2 - 0.1 * HeightFindings)));
+                    acBlkTblRec.AppendEntity(Port);
+                    acTrans.AddNewlyCreatedDBObject(Port, true);
+                    Findings.BooleanOperation(BooleanOperationType.BoolSubtract,Port);
+                }
+                if (CountPorts > 2)
+                {
+                    Solid3d Port1 = new Solid3d();
+                    Port1.SetDatabaseDefaults();
+                    Port1.CreateFrustum(LenFindings, DiameretPorts / 2, DiameretPorts / 2, DiameretPorts / 2);
+                    Port1.ColorIndex = 4;
+                    Port1.TransformBy(Matrix3d.Displacement(new Point3d(0, -LenBox / 2 + (LenFindings/ 2) , DiameretBox / 2 + HeightFindings / 2 - 0.1 * HeightFindings) - Point3d.Origin));
+                    Port1.TransformBy(Matrix3d.Rotation(1.57, vRotPort, new Point3d(0, -LenBox / 2 + 1.6 * LenFindings / 3 / 2, DiameretBox / 2 + HeightFindings / 2 - 0.1 * HeightFindings)));
+                    acBlkTblRec.AppendEntity(Port1);
+                    acTrans.AddNewlyCreatedDBObject(Port1, true);
+                    Findings.BooleanOperation(BooleanOperationType.BoolSubtract, Port1);
+                }
+                if (CountPorts > 4)
+                {
+                    Solid3d Port2 = new Solid3d();
+                    Port2.SetDatabaseDefaults();
+                    Port2.CreateFrustum(LenFindings, DiameretPorts / 2, DiameretPorts / 2, DiameretPorts / 2);
+                    Port2.ColorIndex = 4;
+                    Port2.TransformBy(Matrix3d.Displacement(new Point3d(0, -LenBox / 2 + (LenFindings *0.8), DiameretBox / 2 + HeightFindings / 2 - 0.1 * HeightFindings) - Point3d.Origin));
+                    Port2.TransformBy(Matrix3d.Rotation(1.57, vRotPort, new Point3d(0, -LenBox / 2 + 1.6 * LenFindings / 3 / 2, DiameretBox / 2 + HeightFindings / 2 - 0.1 * HeightFindings)));
+                    acBlkTblRec.AppendEntity(Port2);
+                    acTrans.AddNewlyCreatedDBObject(Port2, true);
+                   // Findings.BooleanOperation(BooleanOperationType.BoolSubtract, Port2);
+                }   
+              
+                
+
+
+
+                // Save the new objects to the database
+                acTrans.Commit();
+            }
+        }
+
+
+
+
+
+
+    }
+}

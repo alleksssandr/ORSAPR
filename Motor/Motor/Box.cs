@@ -21,15 +21,15 @@ namespace Motor
     class Box : IPart
     {
         
-        #region 
+        #region Данные класса Корпус
 
         /// <summary>
-        /// диаметр корпуса
+        /// Диаметр корпуса
         /// </summary>
         private int _diameretBox;
         
         /// <summary>
-        /// длина корпуса 
+        /// Длина корпуса 
         /// </summary>
         private int _lenBox; 
       
@@ -56,19 +56,19 @@ namespace Motor
             int lenBox      = _lenBox;
             int diameretBox = _diameretBox;
 
-            // Open the Block table record for read
-            BlockTable acBlkTbl = trans.GetObject(database.BlockTableId, OpenMode.ForRead) as BlockTable;
+            // Открываем таблицу блоков для чтения
+            BlockTable blockTable = trans.GetObject(database.BlockTableId, OpenMode.ForRead) as BlockTable;
 
-            // Open the Block table record Model space for write
-            BlockTableRecord acBlkTblRec = trans.GetObject(acBlkTbl[BlockTableRecord.ModelSpace], OpenMode.ForWrite) as BlockTableRecord;
+            // Открываем таблицу блоков модели для записи
+            BlockTableRecord blockTableRecord = trans.GetObject(blockTable[BlockTableRecord.ModelSpace], OpenMode.ForWrite) as BlockTableRecord;
 
             Solid3d box = new Solid3d();
             box.SetDatabaseDefaults();
             box.CreateFrustum(lenBox, diameretBox / 2, diameretBox / 2, diameretBox / 2);
             box.ColorIndex = 4;
 
-            // Add the new object to the block table record and the transaction
-            acBlkTblRec.AppendEntity(box);
+            // Добавляем новый обьект в таблицу блоков и отправляем на транзакцию
+            blockTableRecord.AppendEntity(box);
             trans.AddNewlyCreatedDBObject(box, true);
 
             ObjectId[] ids = new ObjectId[] { box.ObjectId };
@@ -82,7 +82,7 @@ namespace Motor
             DoubleCollection startSetback = new DoubleCollection();
             DoubleCollection endSetback = new DoubleCollection();
 
-            //углы скругления
+            // Углы скругления
             double angTop = 60.0;
             double angDown = 15.0;
             using (Autodesk.AutoCAD.BoundaryRepresentation.Brep brep = new Autodesk.AutoCAD.BoundaryRepresentation.Brep(path))
@@ -94,8 +94,6 @@ namespace Motor
                         subentIds.Add(edge.SubentityPath.SubentId);
                         radii.Add(angTop);
 
-                        // Setback fillets. Defines a setback distance
-                        // from a vertex at which the fillets start to blend
                         startSetback.Add(0.0);
                         endSetback.Add(angDown);
                     }
@@ -112,28 +110,24 @@ namespace Motor
 
             box.FilletEdges(subentIds.ToArray(), radii, startSetback, endSetback);
 
-            // Position the center of the 3D solid at (5,5,0) 
+            // Позиция центра новой фигуры
             box.TransformBy(Matrix3d.Displacement(new Point3d(0, 0, 0) - Point3d.Origin));
 
-            //Rotate
-            double angle90 =Math.PI/2;// угол поворта = 90 градусов 
+            double angleRotate = Math.PI/2; 
             Vector3d vRot = new Point3d(0, 0, 0).GetVectorTo(new Point3d(1, 0, 0));
-            box.TransformBy(Matrix3d.Rotation(angle90, vRot, new Point3d(0, 0, 0)));
+            box.TransformBy(Matrix3d.Rotation(angleRotate, vRot, new Point3d(0, 0, 0)));
 
             double radiusBox = diameretBox / 2;
             double coordinate = (radiusBox * ((Math.Sqrt(2) - 1) / 2) + radiusBox) / Math.Sqrt(2);
 
-            //поворта = 45 градусов
-            double angle45 = Math.PI/4;
-
-            //отрисовка лап
+            // Отрисовка лап
             double lenPaw = 0.9 * lenBox;
             BuildPawsBox(database, trans, radiusBox / 2, lenBox, radiusBox, -radiusBox, 0);
-            BuildPawsBox(database, trans, radiusBox / 2, lenPaw, coordinate, -coordinate, angle45);
+            BuildPawsBox(database, trans, radiusBox / 2, lenPaw, coordinate, -coordinate, angleRotate/2);
             BuildPawsBox(database, trans, radiusBox / 2, lenBox, -radiusBox, -radiusBox, 0);
-            BuildPawsBox(database, trans, radiusBox / 2, lenPaw, -coordinate, -coordinate, -angle45);
+            BuildPawsBox(database, trans, radiusBox / 2, lenPaw, -coordinate, -coordinate, -angleRotate/2);
 
-            //Элементы радиатора
+            // Элементы радиатора
             int n = parameters.CountGrille;
             double coordX = 0;
             double coordZ = 0;
@@ -162,75 +156,71 @@ namespace Motor
         /// <summary>
         /// Функция построения части лапы мотора
         /// </summary>
-        /// <param name="database">База данных</param>
-        /// <param name="trans">Транзакция</param>
-        /// <param name="width">Ширина части лапы</param>
-        /// <param name="len">Длина части лапы</param>
-        /// <param name="coordinateX">Позиция центра по координате Х </param>
-        /// <param name="coordinateZ">Позиция центра по координате Z</param>
-        /// <param name="angle">Угол вращения</param>
+        /// <param name="database"> База данных</param>
+        /// <param name="trans"> Транзакция</param>
+        /// <param name="width"> Ширина части лапы</param>
+        /// <param name="len"> Длина части лапы</param>
+        /// <param name="coordinateX"> Позиция центра по координате Х </param>
+        /// <param name="coordinateZ"> Позиция центра по координате Z</param>
+        /// <param name="angle"> Угол вращения</param>
         private void BuildPawsBox(Database database, Transaction trans, double width, double len, double coordinateX, double coordinateZ, double angle)
         {
             double r = _diameretBox / 2;
             double koord = (r * ((Math.Sqrt(2) - 1) / 2) + r) / Math.Sqrt(2);
 
-            // Open the Block table record for read
-            BlockTable acBlkTbl;
-            acBlkTbl = trans.GetObject(database.BlockTableId, OpenMode.ForRead) as BlockTable;
+            // Открываем таблицу блоков для чтения
+            BlockTable blockTable = trans.GetObject(database.BlockTableId, OpenMode.ForRead) as BlockTable;
 
-            // Open the Block table record Model space for write
-            BlockTableRecord acBlkTblRec;
-            acBlkTblRec = trans.GetObject(acBlkTbl[BlockTableRecord.ModelSpace], OpenMode.ForWrite) as BlockTableRecord;
+            // Открываем таблицу блоков модели для записи
+            BlockTableRecord blockTableRecord = trans.GetObject(blockTable[BlockTableRecord.ModelSpace], OpenMode.ForWrite) as BlockTableRecord;
 
-            // Create a 3D solid box
+            // Создать новую фигуру
             Solid3d paw = new Solid3d();
             paw.SetDatabaseDefaults();
             paw.CreateBox(width, len, 20);
             paw.ColorIndex = 7;
 
-            // Position the center of the 3D solid at (5,5,0) 
+            // Позиция центра отрисовки фигуры
             paw.TransformBy(Matrix3d.Displacement(new Point3d(coordinateX, 0, coordinateZ) - Point3d.Origin));
-
-            //Rotate
             Vector3d vRotPaw = new Point3d(0, 0, 0).GetVectorTo(new Point3d(0, 1, 0));
             paw.TransformBy(Matrix3d.Rotation(angle, vRotPaw, new Point3d(coordinateX, 0, coordinateZ)));
 
-            // Add the new object to the block table record and the transaction
-            acBlkTblRec.AppendEntity(paw);
+            // Добавляем новый обьект в таблицу блоков и отправляем на транзакцию
+            blockTableRecord.AppendEntity(paw);
             trans.AddNewlyCreatedDBObject(paw, true);            
         }
 
         /// <summary>
         /// Функция построения элементов радиаторной решетки
         /// </summary>
-        /// <param name="database">База данных</param>
-        /// <param name="trans">Транзакция</param>
-        /// <param name="coordinateX">Позиция центра по координате Х</param>
-        /// <param name="coordinateZ">Позиция центра по координате Z</param>
+        /// <param name="database"> База данных</param>
+        /// <param name="trans"> Транзакция</param>
+        /// <param name="coordinateX"> Позиция центра по координате Х</param>
+        /// <param name="coordinateZ"> Позиция центра по координате Z</param>
         private void BuildRadiator(Database database, Transaction trans, double coordinateX, double coordinateZ)
         {
-            // Open the Block table record for read
-            BlockTable acBlkTbl = trans.GetObject(database.BlockTableId, OpenMode.ForRead) as BlockTable;
+            // Открываем таблицу блоков для чтения
+            BlockTable blockTable = trans.GetObject(database.BlockTableId, OpenMode.ForRead) as BlockTable;
 
-            // Open the Block table record Model space for write
-            BlockTableRecord acBlkTblRec = trans.GetObject(acBlkTbl[BlockTableRecord.ModelSpace], OpenMode.ForWrite) as BlockTableRecord;
+            // Открываем таблицу блоков модели для записи
+            BlockTableRecord blockTableRecord = trans.GetObject(blockTable[BlockTableRecord.ModelSpace], OpenMode.ForWrite) as BlockTableRecord;
 
-            // Create a 3D solid box
-            double sizeY = _lenBox * 0.7;
-            double sizeX = _diameretBox / 8;
+            // Создать новую фигуру
+            double sizeLenBox = _lenBox * 0.7;
+            double sizeDiameretBox = _diameretBox / 8;
 
             Solid3d paw = new Solid3d();
             paw.SetDatabaseDefaults();
-            paw.CreateBox(sizeX, sizeY, 5);
+            paw.CreateBox(sizeDiameretBox, sizeLenBox, 5);
             paw.ColorIndex = 3;
 
-            // Position the center of the 3D solid at (5,5,0) 
+            // Позиция центра отрисовки фигуры
             double coordY = -0.1 * _lenBox;
             paw.TransformBy(Matrix3d.Displacement(new Point3d(coordinateX, coordY, coordinateZ) - Point3d.Origin));
 
-            
-            // Add the new object to the block table record and the transaction
-            acBlkTblRec.AppendEntity(paw);
+
+            // Добавляем новый обьект в таблицу блоков и отправляем на транзакцию
+            blockTableRecord.AppendEntity(paw);
             trans.AddNewlyCreatedDBObject(paw, true);
         }
     }

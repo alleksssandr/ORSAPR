@@ -37,7 +37,6 @@ namespace Motor
         }
 
         #region Properties
-        //properties
 
         /// <summary>
         /// Длина корпуса
@@ -99,7 +98,7 @@ namespace Motor
        /// <summary>
        /// Функция проверки правильности параметров мотора
        /// </summary>
-       /// <param name="parameters">лист параметров</param>
+       /// <param name="parameters"> Лист параметров</param>
         private string Validation(List<int> parameters)
         {
             string errors = "";

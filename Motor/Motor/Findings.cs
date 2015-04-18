@@ -18,32 +18,33 @@ namespace Motor
     /// Класс отвечающий за коробку выводов
     /// </summary>
     public class Findings : IPart
-     {
+    {
 
-        
-        #region
+
+        #region Данные класса Коробка выводов
+
         /// <summary>
-        /// ширина коробки выводов
+        /// Ширина коробки выводов
         /// </summary>
         private int _widthFindings;     
 
         /// <summary>
-        /// длина коробки выводов
+        /// Длина коробки выводов
         /// </summary>
         private int _lenFindings;      
  
         /// <summary>
-        /// высота коробки выводов
+        /// Высота коробки выводов
         /// </summary>
         private int _heightFindings; 
 
         /// <summary>
-        /// количество портов коробки выводов
+        /// Количество портов коробки выводов
         /// </summary>
         private int _countPorts; 
 
         /// <summary>
-        /// диаметр портов коробки выводов
+        /// Диаметр портов коробки выводов
         /// </summary>
         private int _diameretPorts;
 
@@ -68,7 +69,7 @@ namespace Motor
         /// <param name="database">База данный объектов </param>
         /// <param name="Trans">Транзакции</param>
         /// <param name="parameters">Класс с параметрами построения мотора</param>
-        public void Build(Database database, Transaction acTrans, MotorParameters parameters)
+        public void Build(Database database, Transaction trans, MotorParameters parameters)
         {           
                 int widthFindings = _widthFindings;
                 int lenFindings = _lenFindings;
@@ -80,15 +81,15 @@ namespace Motor
                 int lenBox = parameters.LenBox;
                 int diameretBox = parameters.DiameretBox;
 
-                //Коэффициенты трансформации
+                // Коэффициенты трансформации
                 double transformationFactorLen = 1.2;
                 double transformationFactorHeight = 0.1;
 
-                //Открываем таблицу блоков для чтения
-                BlockTable acBlkTbl = acTrans.GetObject(database.BlockTableId, OpenMode.ForRead) as BlockTable;
+                // Открываем таблицу блоков для чтения
+                BlockTable blockTable = trans.GetObject(database.BlockTableId, OpenMode.ForRead) as BlockTable;
 
-                //Открываем таблицу блоков модели для записи
-                BlockTableRecord acBlkTblRec = acTrans.GetObject(acBlkTbl[BlockTableRecord.ModelSpace], OpenMode.ForWrite) as BlockTableRecord;
+                // Открываем таблицу блоков модели для записи
+                BlockTableRecord blockTableRecord = trans.GetObject(blockTable[BlockTableRecord.ModelSpace], OpenMode.ForWrite) as BlockTableRecord;
 
                 // Создаем 3D обьект - прямоугольник
                 Solid3d findings = new Solid3d();
@@ -99,24 +100,24 @@ namespace Motor
                 // Задаем позицию центра 3D обьекта
                 findings.TransformBy(Matrix3d.Displacement(new Point3d(0, -lenBox / 2 + transformationFactorLen * lenFindings / 2, diameretBox / 2 + heightFindings / 2 - transformationFactorHeight * heightFindings) - Point3d.Origin));
 
-                // Add the new object to the block table record and the transaction
-                acBlkTblRec.AppendEntity(findings);
-                acTrans.AddNewlyCreatedDBObject(findings, true);
+                // Добавляем новый обьект в таблицу блоков и отправляем на транзакцию
+                blockTableRecord.AppendEntity(findings);
+                trans.AddNewlyCreatedDBObject(findings, true);
 
-                //Параметры 
+                // Параметры 
                 double cavityWidth = widthFindings * 0.8;
                 double cavityLen = lenFindings * 0.9;
                 double cavityHeight = heightFindings * 0.8;
 
-                // Create a 3D solid box
+                // Создать новую фигуру
                 Solid3d cavity = new Solid3d();
                 cavity.SetDatabaseDefaults();
                 cavity.CreateBox(cavityWidth, cavityLen, cavityHeight);
                 cavity.TransformBy(Matrix3d.Displacement(new Point3d(0, -lenBox / 2 + transformationFactorLen * lenFindings / 2, diameretBox / 2 + heightFindings / 2 - transformationFactorHeight * heightFindings) - Point3d.Origin));
 
-                // Add the new object to the block table record and the transaction
-                acBlkTblRec.AppendEntity(cavity);
-                acTrans.AddNewlyCreatedDBObject(cavity, true);
+                // Добавляем новый обьект в таблицу блоков и отправляем на транзакцию
+                blockTableRecord.AppendEntity(cavity);
+                trans.AddNewlyCreatedDBObject(cavity, true);
 
                 findings.BooleanOperation(BooleanOperationType.BoolSubtract, cavity);
 
@@ -128,17 +129,17 @@ namespace Motor
                 if (countPorts >= 1)
                 {
                     double y1 = -lenBox / 2 + (transformationFactorLen * lenFindings / 2 + lenFindings / 3);
-                    Ports(database, acTrans, parameters, 0, findings, coordX, y1, coordZ);
+                    Ports(database, trans, parameters, 0, findings, coordX, y1, coordZ);
                 }
                 if (countPorts > 2)
                 {
                     double y2 = -lenBox / 2 + (transformationFactorLen * lenFindings / 2);
-                    Ports(database, acTrans, parameters, 2, findings, coordX, y2, coordZ);
+                    Ports(database, trans, parameters, 2, findings, coordX, y2, coordZ);
                 }
                 if (countPorts > 4)
                 {
                     double y3 = -lenBox / 2 + (transformationFactorLen * lenFindings / 2 - lenFindings / 3);
-                    Ports(database, acTrans, parameters, 4, findings, -coordX, y3, coordZ);
+                    Ports(database, trans, parameters, 4, findings, -coordX, y3, coordZ);
                 }
         }
 
@@ -155,12 +156,11 @@ namespace Motor
         /// <param name="z">Позиция центра по координате Z</param>
         private void Ports(Database database, Transaction trans, MotorParameters parameters, int positionPort, Solid3d figure, double x, double y, double z)
         {
-            // Open the Block table record for read
-            BlockTable acBlkTbl;
-            acBlkTbl = trans.GetObject(database.BlockTableId, OpenMode.ForRead) as BlockTable;
+            // Открываем таблицу блоков для чтения
+            BlockTable blockTable = trans.GetObject(database.BlockTableId, OpenMode.ForRead) as BlockTable;
 
-            // Open the Block table record Model space for write
-            BlockTableRecord acBlkTblRec = trans.GetObject(acBlkTbl[BlockTableRecord.ModelSpace], OpenMode.ForWrite) as BlockTableRecord;
+            // Открываем таблицу блоков модели для записи
+            BlockTableRecord blockTableRecord = trans.GetObject(blockTable[BlockTableRecord.ModelSpace], OpenMode.ForWrite) as BlockTableRecord;
 
             // Создаем 3D обьект - прямоугольник
             Solid3d port = new Solid3d();
@@ -172,7 +172,7 @@ namespace Motor
             port.TransformBy(Matrix3d.Displacement(new Point3d(x, y, z) - Point3d.Origin));
             Vector3d vRotPort = new Point3d(0, 0, 0).GetVectorTo(new Point3d(0, 1, 0));
             port.TransformBy(Matrix3d.Rotation(Math.PI / 2, vRotPort, new Point3d(x, y, z)));
-            acBlkTblRec.AppendEntity(port);
+            blockTableRecord.AppendEntity(port);
             trans.AddNewlyCreatedDBObject(port, true);
             figure.BooleanOperation(BooleanOperationType.BoolSubtract, port);
         }

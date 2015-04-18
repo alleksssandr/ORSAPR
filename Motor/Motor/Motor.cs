@@ -43,25 +43,25 @@ namespace Motor
         /// <param name="parameters">Класс с параметрами построения мотора</param>
         public static void BuildMotor(MotorParameters parameters)
         {
-            Document acDoc = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument;
-           
-            Database acCurDb = acDoc.Database;
+            Document doc = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument;
 
-            Transaction acTrans = acCurDb.TransactionManager.StartTransaction();
+            Database database = doc.Database;
 
-            //Коробка выводов
+            Transaction trans = database.TransactionManager.StartTransaction();
+
+            // Коробка выводов
             IPart finding = new Findings(parameters);
-            finding.Build(acCurDb, acTrans, parameters);
+            finding.Build(database, trans, parameters);
 
-            //Корпус мотора
+            // Корпус мотора
             IPart box = new Box(parameters);
-            box.Build(acCurDb, acTrans, parameters);
+            box.Build(database, trans, parameters);
 
-            //Ротор
+            // Ротор
             IPart rotor = new Rotor(parameters);
-            rotor.Build(acCurDb, acTrans, parameters);
+            rotor.Build(database, trans, parameters);
 
-            acTrans.Commit();
+            trans.Commit();
         }
     }
 }

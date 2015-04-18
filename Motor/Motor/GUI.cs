@@ -32,8 +32,8 @@ namespace Motor
         /// <summary>
         /// Обработчик события нажатия кнопки
         /// </summary>
-        /// <param name="sender">Обьект, который вызвал событие</param>
-        /// <param name="e">Обьект класса передающий дополнительную информацию обработчику</param>
+        /// <param name="sender"> Обьект, который вызвал событие</param>
+        /// <param name="e"> Обьект класса передающий дополнительную информацию обработчику</param>
         private void StartBuild_Click(object sender, EventArgs e)
         {
             if (LenBox.Text == ""
@@ -82,28 +82,34 @@ namespace Motor
 
         private void StartTest_Click(object sender, EventArgs e)
         {
-            Form.ActiveForm.Close();   
-            
+#if DEBUG            
+            // Диагностика времени выполнения функции
             System.Diagnostics.Stopwatch myStopwatch = new System.Diagnostics.Stopwatch();
+
+            // Создание и открытие его для записи
             StreamWriter file = new StreamWriter("D:\\TestMOTOR.txt");
+
             for (int i = 0; i < 100; i++)
             {
-                myStopwatch.Reset();
-                myStopwatch.Start(); //запуск
-                
-                    List<int> parameters = new List<int>() {300,200,50,50,10,50,100,30,10,3,7};
-
-                        MotorParameters parametersMotor = new MotorParameters(parameters);                    
-                        Motor.BuildMotor(parametersMotor);
+                // Сброс
+                myStopwatch.Reset(); 
+                // Запуск
+                myStopwatch.Start(); 
+                     
+                List<int> parameters = new List<int>() {300,200,50,50,10,50,100,30,10,3,7};
+                MotorParameters parametersMotor = new MotorParameters(parameters);                    
+                Motor.BuildMotor(parametersMotor);
                                    
-
-                myStopwatch.Stop(); //остановить
+                // Остановить
+                myStopwatch.Stop(); 
 
                 TimeSpan ts = myStopwatch.Elapsed;
                 string elapsedTime = String.Format("{0:f}", ts.Milliseconds);
-                file.Write(elapsedTime + "\n");
+                // Запись в файл результатов
+                file.Write(elapsedTime + "\n"); 
             }
             file.Close();
         }
+#endif
     }    
 }

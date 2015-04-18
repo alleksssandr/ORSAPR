@@ -19,21 +19,21 @@ namespace Motor
     /// </summary>
     class Rotor : IPart
     {
-        
-        #region
+
+        #region Данные класса Ротор
 
         /// <summary>
-        /// диаметр вала
+        /// Диаметр вала
         /// </summary>
         private int _diameretRotor; 
 
         /// <summary>
-        /// длина вала
+        /// Длина вала
         /// </summary>
         private int _lenRotor;
   
         /// <summary>
-        /// длина фикс. понки
+        /// Длина фикс. понки
         /// </summary>
         private int _lenPin;  
 
@@ -65,42 +65,40 @@ namespace Motor
 
                 int lenBox = parameters.LenBox;
 
-                // Open the Block table record for read
-                BlockTable acBlkTbl = trans.GetObject(database.BlockTableId, OpenMode.ForRead) as BlockTable;
+                // Открываем таблицу блоков для чтения
+                BlockTable blockTable = trans.GetObject(database.BlockTableId, OpenMode.ForRead) as BlockTable;
 
-                // Open the Block table record Model space for write
-                BlockTableRecord acBlkTblRec = trans.GetObject(acBlkTbl[BlockTableRecord.ModelSpace], OpenMode.ForWrite) as BlockTableRecord;
+                // Открываем таблицу блоков модели для записи
+                BlockTableRecord blockTableRecord = trans.GetObject(blockTable[BlockTableRecord.ModelSpace], OpenMode.ForWrite) as BlockTableRecord;
 
-                // Create a 3D solid cylinder
+                // Создам новый цилиндр
                 Solid3d rotor = new Solid3d();
                 rotor.SetDatabaseDefaults();
                 rotor.CreateFrustum(lenRotor, diameretRotor / 2, diameretRotor / 2, diameretRotor / 2);
                 rotor.ColorIndex = 4;
 
-                // Position the center of the 3D solid at (5,5,0) 
+                // Позиция центра отрисовки обьекта 
                 rotor.TransformBy(Matrix3d.Displacement(new Point3d(0, -lenRotor / 2 - lenBox / 2, 0) - Point3d.Origin));
 
-                //Rotate
-                double angle = Math.PI / 2;//угол поворота
-
+                double angleRotate = Math.PI / 2;
                 Vector3d vRotRotor = new Point3d(0, 0, 0).GetVectorTo(new Point3d(1, 0, 0));
-                rotor.TransformBy(Matrix3d.Rotation(angle, vRotRotor, new Point3d(0, -lenRotor / 2 - lenBox / 2, 0)));
+                rotor.TransformBy(Matrix3d.Rotation(angleRotate, vRotRotor, new Point3d(0, -lenRotor / 2 - lenBox / 2, 0)));
 
-                // Add the new object to the block table record and the transaction
-                acBlkTblRec.AppendEntity(rotor);
+                // Добавляем новый обьект в таблицу блоков и отправляем на транзакцию
+                blockTableRecord.AppendEntity(rotor);
                 trans.AddNewlyCreatedDBObject(rotor, true);
 
-                // Create a 3D solid box
+                // Созать новую фигуру
                 Solid3d pin = new Solid3d();
                 pin.SetDatabaseDefaults();
                 pin.CreateBox(diameretRotor / 10, lenPin, diameretRotor / 10);
                 pin.ColorIndex = 7;
 
-                // Position the center of the 3D solid at (5,5,0) 
+                // Позиция центра
                 pin.TransformBy(Matrix3d.Displacement(new Point3d(0, -lenBox / 2 - lenRotor + lenPin / 2, diameretRotor / 2) - Point3d.Origin));
 
-                // Add the new object to the block table record and the transaction
-                acBlkTblRec.AppendEntity(pin);
+                // Добавляем новый обьект в таблицу блоков и отправляем на транзакцию
+                blockTableRecord.AppendEntity(pin);
                 trans.AddNewlyCreatedDBObject(pin, true);
             }
     }

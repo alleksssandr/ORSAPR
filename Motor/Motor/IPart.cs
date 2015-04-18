@@ -22,6 +22,6 @@ namespace Motor
         /// <param name="CurDb">База данных</param>
         /// <param name="Trans">Транзакция </param>
         /// <param name="param">Обьект класса параметры</param>
-        void Build(Database curDb, Transaction trans, MotorParameters param);
+        void Build(Database database, Transaction trans, MotorParameters param);
     }
 }

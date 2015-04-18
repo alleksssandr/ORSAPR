@@ -21,7 +21,7 @@ namespace Motor
     class Box : IPart
     {
         
-        #region Данные класса Корпус
+        #region Fields
 
         /// <summary>
         /// Диаметр корпуса

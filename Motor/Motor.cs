@@ -20,7 +20,6 @@ namespace Motor
     /// </summary>
     class Motor : IExtensionApplication
     {
-      
         /// <summary>
         /// Функция инициализации (выполняется при загрузке плагина)
         /// </summary>

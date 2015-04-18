@@ -20,7 +20,7 @@ namespace Motor
     class Rotor : IPart
     {
 
-        #region Данные класса Ротор
+        #region Fields
 
         /// <summary>
         /// Диаметр вала

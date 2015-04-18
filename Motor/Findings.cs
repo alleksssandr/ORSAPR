@@ -21,7 +21,7 @@ namespace Motor
     {
 
 
-        #region Данные класса Коробка выводов
+        #region Fields
 
         /// <summary>
         /// Ширина коробки выводов

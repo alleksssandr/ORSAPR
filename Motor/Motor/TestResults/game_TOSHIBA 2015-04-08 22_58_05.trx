@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="9a189ebc-b297-48d4-8b0c-3578e8ef8104" name="game@TOSHIBA 2015-04-08 22:58:05" runUser="TOSHIBA\game" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="Локальные" id="f75022e1-768b-4add-842b-edbd1b735003">
+    <Description>Это - параметры по умолчанию для локального тестового запуска.</Description>
+    <Deployment enabled="false" runDeploymentRoot="game_TOSHIBA 2015-04-08 22_58_05" />
+    <Execution>
+      <TestTypeSpecific />
+      <AgentRule name="Execution Agents">
+      </AgentRule>
+    </Execution>
+  </TestSettings>
+  <Times creation="2015-04-08T22:58:05.8873615+06:00" queuing="2015-04-08T22:58:07.4084485+06:00" start="2015-04-08T22:58:07.5274553+06:00" finish="2015-04-08T22:58:08.5625145+06:00" />
+  <ResultSummary outcome="Completed">
+    <Counters total="1" executed="1" passed="1" error="0" failed="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <TestDefinitions>
+    <UnitTest name="TestMethod1" storage="c:\users\game\desktop\орсапр\motor\testmotor\bin\debug\testmotor.dll" id="c42a16a9-5536-9e70-7f2a-15f7a638bb38">
+      <Execution id="edf90d99-3a52-42df-a505-e0e149cad789" />
+      <TestMethod codeBase="C:/Users/game/Desktop/ОРСАПР/Motor/TestMotor/bin/Debug/TestMotor.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestMotor.UnitTest1, TestMotor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestMethod1" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Отсутствующие в списке результаты" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="Все загруженные результаты" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="c42a16a9-5536-9e70-7f2a-15f7a638bb38" executionId="edf90d99-3a52-42df-a505-e0e149cad789" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="edf90d99-3a52-42df-a505-e0e149cad789" testId="c42a16a9-5536-9e70-7f2a-15f7a638bb38" testName="TestMethod1" computerName="TOSHIBA" duration="00:00:00.0457340" startTime="2015-04-08T22:58:07.6214607+06:00" endTime="2015-04-08T22:58:08.4775097+06:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="edf90d99-3a52-42df-a505-e0e149cad789">
+    </UnitTestResult>
+  </Results>
+</TestRun>

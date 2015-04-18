@@ -1,0 +1,14 @@
+C:\Users\01001101\Desktop\Motor\Motor\bin\Debug\Motor.dll
+C:\Users\01001101\Desktop\Motor\Motor\bin\Debug\Motor.pdb
+C:\Users\01001101\Desktop\Motor\Motor\obj\Debug\Motor.csprojResolveAssemblyReference.cache
+C:\Users\01001101\Desktop\Motor\Motor\obj\Debug\Motor.GUI.resources
+C:\Users\01001101\Desktop\Motor\Motor\obj\Debug\Motor.csproj.GenerateResource.Cache
+C:\Users\01001101\Desktop\Motor\Motor\obj\Debug\Motor.dll
+C:\Users\01001101\Desktop\Motor\Motor\obj\Debug\Motor.pdb
+C:\Users\game\Desktop\ОРСАПР\Motor\Motor\bin\Debug\Motor.dll
+C:\Users\game\Desktop\ОРСАПР\Motor\Motor\bin\Debug\Motor.pdb
+C:\Users\game\Desktop\ОРСАПР\Motor\Motor\obj\Debug\Motor.csprojResolveAssemblyReference.cache
+C:\Users\game\Desktop\ОРСАПР\Motor\Motor\obj\Debug\Motor.GUI.resources
+C:\Users\game\Desktop\ОРСАПР\Motor\Motor\obj\Debug\Motor.csproj.GenerateResource.Cache
+C:\Users\game\Desktop\ОРСАПР\Motor\Motor\obj\Debug\Motor.dll
+C:\Users\game\Desktop\ОРСАПР\Motor\Motor\obj\Debug\Motor.pdb

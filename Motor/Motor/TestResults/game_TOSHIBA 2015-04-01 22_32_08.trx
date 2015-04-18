@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="0d9a28e9-9123-42ae-8a5c-a0b61de7bb6f" name="game@TOSHIBA 2015-04-01 22:32:08" runUser="TOSHIBA\game" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="Локальные" id="f75022e1-768b-4add-842b-edbd1b735003">
+    <Description>Это - параметры по умолчанию для локального тестового запуска.</Description>
+    <Deployment enabled="false" runDeploymentRoot="game_TOSHIBA 2015-04-01 22_32_08">
+      <DeploymentItem filename="C:\Users\game\Desktop\ОРСАПР\Motor\Motor\bin\Debug\Motor.dll" />
+      <DeploymentItem filename="C:\Users\game\Desktop\ОРСАПР\Motor\TestProject1\nunit.framework.dll" />
+    </Deployment>
+    <Execution>
+      <TestTypeSpecific />
+      <AgentRule name="Execution Agents">
+      </AgentRule>
+    </Execution>
+  </TestSettings>
+  <Times creation="2015-04-01T22:32:08.4197577+06:00" queuing="2015-04-01T22:32:08.4447592+06:00" start="2015-04-01T22:32:08.4577599+06:00" finish="2015-04-01T22:32:09.0247923+06:00" />
+  <ResultSummary outcome="Completed">
+    <Counters total="11" executed="11" passed="11" error="0" failed="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <TestDefinitions>
+    <UnitTest name="TestLenBox" storage="c:\users\game\desktop\орсапр\motor\testproject1\bin\debug\testproject1.dll" id="d894f7a2-fd75-4cd9-d87b-cb056685103c">
+      <Execution id="7866e981-8327-4964-b581-5f2860ea7a50" />
+      <TestMethod codeBase="C:/Users/game/Desktop/ОРСАПР/Motor/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.UnitTest2, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestLenBox" />
+    </UnitTest>
+    <UnitTest name="TestDiameretPorts" storage="c:\users\game\desktop\орсапр\motor\testproject1\bin\debug\testproject1.dll" id="9e9473f5-84ab-a81b-333e-9a8eed366843">
+      <Execution id="98bfa8e9-8bc3-40dc-a406-c125a7641117" />
+      <TestMethod codeBase="C:/Users/game/Desktop/ОРСАПР/Motor/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.UnitTest2, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestDiameretPorts" />
+    </UnitTest>
+    <UnitTest name="TestDiamRotor" storage="c:\users\game\desktop\орсапр\motor\testproject1\bin\debug\testproject1.dll" id="233865e8-ff4c-e52e-6f26-60f0af26f47e">
+      <Execution id="cc42fb09-45b7-40cc-b10a-43c56e8a6e4f" />
+      <TestMethod codeBase="C:/Users/game/Desktop/ОРСАПР/Motor/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.UnitTest2, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestDiamRotor" />
+    </UnitTest>
+    <UnitTest name="TestCountPorts" storage="c:\users\game\desktop\орсапр\motor\testproject1\bin\debug\testproject1.dll" id="49ec3fbf-0fb6-a475-f71b-73085c2641e8">
+      <Execution id="4d917e51-4cc6-449b-ab30-8bfafc430abb" />
+      <TestMethod codeBase="C:/Users/game/Desktop/ОРСАПР/Motor/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.UnitTest2, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestCountPorts" />
+    </UnitTest>
+    <UnitTest name="TestDiamBox" storage="c:\users\game\desktop\орсапр\motor\testproject1\bin\debug\testproject1.dll" id="f52cb70e-b941-5f49-3b0f-9690394636c8">
+      <Execution id="51ce699c-93c4-44d0-9c4b-4223778e43d6" />
+      <TestMethod codeBase="C:/Users/game/Desktop/ОРСАПР/Motor/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.UnitTest2, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestDiamBox" />
+    </UnitTest>
+    <UnitTest name="TestWidthFindings" storage="c:\users\game\desktop\орсапр\motor\testproject1\bin\debug\testproject1.dll" id="96712b5e-6d58-c3af-7930-b5b1d35bc293">
+      <Execution id="6e6dece7-ed1e-48c1-9431-2b0213318706" />
+      <TestMethod codeBase="C:/Users/game/Desktop/ОРСАПР/Motor/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.UnitTest2, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestWidthFindings" />
+    </UnitTest>
+    <UnitTest name="TestLenFindings" storage="c:\users\game\desktop\орсапр\motor\testproject1\bin\debug\testproject1.dll" id="661d95ce-17a1-3655-649a-38232d4e90d1">
+      <Execution id="25282e50-1070-4afa-b15f-5336c32061ad" />
+      <TestMethod codeBase="C:/Users/game/Desktop/ОРСАПР/Motor/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.UnitTest2, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestLenFindings" />
+    </UnitTest>
+    <UnitTest name="TestHeightFindings" storage="c:\users\game\desktop\орсапр\motor\testproject1\bin\debug\testproject1.dll" id="a2fb677b-c560-c517-bc07-87f839c1a64c">
+      <Execution id="b785f37b-bf58-4d8a-b68b-9bc9bb76fccd" />
+      <TestMethod codeBase="C:/Users/game/Desktop/ОРСАПР/Motor/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.UnitTest2, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestHeightFindings" />
+    </UnitTest>
+    <UnitTest name="TestCountGrille" storage="c:\users\game\desktop\орсапр\motor\testproject1\bin\debug\testproject1.dll" id="822bca7d-0f09-dd03-fd41-cb9f76f22cdb">
+      <Execution id="1a0f2abf-70bb-4655-8d21-995171622c06" />
+      <TestMethod codeBase="C:/Users/game/Desktop/ОРСАПР/Motor/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.UnitTest2, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestCountGrille" />
+    </UnitTest>
+    <UnitTest name="TestLenRotor" storage="c:\users\game\desktop\орсапр\motor\testproject1\bin\debug\testproject1.dll" id="b0528344-74ac-8e27-52dc-d5e79ca8bc3c">
+      <Execution id="e3c0dfda-df0d-4bd4-a045-8536cbce6cbb" />
+      <TestMethod codeBase="C:/Users/game/Desktop/ОРСАПР/Motor/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.UnitTest2, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestLenRotor" />
+    </UnitTest>
+    <UnitTest name="TestLenPin" storage="c:\users\game\desktop\орсапр\motor\testproject1\bin\debug\testproject1.dll" id="8c7ebddc-e567-0d17-34d5-58cfa053d0f3">
+      <Execution id="c494fe64-f6fa-4db1-b928-0ca8dd7b1347" />
+      <TestMethod codeBase="C:/Users/game/Desktop/ОРСАПР/Motor/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.UnitTest2, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestLenPin" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Отсутствующие в списке результаты" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="Все загруженные результаты" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="233865e8-ff4c-e52e-6f26-60f0af26f47e" executionId="cc42fb09-45b7-40cc-b10a-43c56e8a6e4f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="49ec3fbf-0fb6-a475-f71b-73085c2641e8" executionId="4d917e51-4cc6-449b-ab30-8bfafc430abb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="661d95ce-17a1-3655-649a-38232d4e90d1" executionId="25282e50-1070-4afa-b15f-5336c32061ad" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="822bca7d-0f09-dd03-fd41-cb9f76f22cdb" executionId="1a0f2abf-70bb-4655-8d21-995171622c06" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8c7ebddc-e567-0d17-34d5-58cfa053d0f3" executionId="c494fe64-f6fa-4db1-b928-0ca8dd7b1347" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="96712b5e-6d58-c3af-7930-b5b1d35bc293" executionId="6e6dece7-ed1e-48c1-9431-2b0213318706" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9e9473f5-84ab-a81b-333e-9a8eed366843" executionId="98bfa8e9-8bc3-40dc-a406-c125a7641117" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a2fb677b-c560-c517-bc07-87f839c1a64c" executionId="b785f37b-bf58-4d8a-b68b-9bc9bb76fccd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b0528344-74ac-8e27-52dc-d5e79ca8bc3c" executionId="e3c0dfda-df0d-4bd4-a045-8536cbce6cbb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d894f7a2-fd75-4cd9-d87b-cb056685103c" executionId="7866e981-8327-4964-b581-5f2860ea7a50" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f52cb70e-b941-5f49-3b0f-9690394636c8" executionId="51ce699c-93c4-44d0-9c4b-4223778e43d6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="cc42fb09-45b7-40cc-b10a-43c56e8a6e4f" testId="233865e8-ff4c-e52e-6f26-60f0af26f47e" testName="TestDiamRotor" computerName="TOSHIBA" duration="00:00:00.0195053" startTime="2015-04-01T22:32:08.4617601+06:00" endTime="2015-04-01T22:32:08.8907847+06:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cc42fb09-45b7-40cc-b10a-43c56e8a6e4f">
+    </UnitTestResult>
+    <UnitTestResult executionId="4d917e51-4cc6-449b-ab30-8bfafc430abb" testId="49ec3fbf-0fb6-a475-f71b-73085c2641e8" testName="TestCountPorts" computerName="TOSHIBA" duration="00:00:00.0005586" startTime="2015-04-01T22:32:08.8967850+06:00" endTime="2015-04-01T22:32:08.9037854+06:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4d917e51-4cc6-449b-ab30-8bfafc430abb">
+    </UnitTestResult>
+    <UnitTestResult executionId="25282e50-1070-4afa-b15f-5336c32061ad" testId="661d95ce-17a1-3655-649a-38232d4e90d1" testName="TestLenFindings" computerName="TOSHIBA" duration="00:00:00.0004805" startTime="2015-04-01T22:32:08.9057855+06:00" endTime="2015-04-01T22:32:08.9117859+06:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="25282e50-1070-4afa-b15f-5336c32061ad">
+    </UnitTestResult>
+    <UnitTestResult executionId="1a0f2abf-70bb-4655-8d21-995171622c06" testId="822bca7d-0f09-dd03-fd41-cb9f76f22cdb" testName="TestCountGrille" computerName="TOSHIBA" duration="00:00:00.0005538" startTime="2015-04-01T22:32:08.9147861+06:00" endTime="2015-04-01T22:32:08.9317870+06:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1a0f2abf-70bb-4655-8d21-995171622c06">
+    </UnitTestResult>
+    <UnitTestResult executionId="c494fe64-f6fa-4db1-b928-0ca8dd7b1347" testId="8c7ebddc-e567-0d17-34d5-58cfa053d0f3" testName="TestLenPin" computerName="TOSHIBA" duration="00:00:00.0005258" startTime="2015-04-01T22:32:08.9347872+06:00" endTime="2015-04-01T22:32:08.9417876+06:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c494fe64-f6fa-4db1-b928-0ca8dd7b1347">
+    </UnitTestResult>
+    <UnitTestResult executionId="6e6dece7-ed1e-48c1-9431-2b0213318706" testId="96712b5e-6d58-c3af-7930-b5b1d35bc293" testName="TestWidthFindings" computerName="TOSHIBA" duration="00:00:00.0008216" startTime="2015-04-01T22:32:08.9477879+06:00" endTime="2015-04-01T22:32:08.9567885+06:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6e6dece7-ed1e-48c1-9431-2b0213318706">
+    </UnitTestResult>
+    <UnitTestResult executionId="98bfa8e9-8bc3-40dc-a406-c125a7641117" testId="9e9473f5-84ab-a81b-333e-9a8eed366843" testName="TestDiameretPorts" computerName="TOSHIBA" duration="00:00:00.0005100" startTime="2015-04-01T22:32:08.9617887+06:00" endTime="2015-04-01T22:32:08.9687891+06:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="98bfa8e9-8bc3-40dc-a406-c125a7641117">
+    </UnitTestResult>
+    <UnitTestResult executionId="b785f37b-bf58-4d8a-b68b-9bc9bb76fccd" testId="a2fb677b-c560-c517-bc07-87f839c1a64c" testName="TestHeightFindings" computerName="TOSHIBA" duration="00:00:00.0004958" startTime="2015-04-01T22:32:08.9727894+06:00" endTime="2015-04-01T22:32:08.9777897+06:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b785f37b-bf58-4d8a-b68b-9bc9bb76fccd">
+    </UnitTestResult>
+    <UnitTestResult executionId="e3c0dfda-df0d-4bd4-a045-8536cbce6cbb" testId="b0528344-74ac-8e27-52dc-d5e79ca8bc3c" testName="TestLenRotor" computerName="TOSHIBA" duration="00:00:00.0004910" startTime="2015-04-01T22:32:08.9817899+06:00" endTime="2015-04-01T22:32:08.9867902+06:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e3c0dfda-df0d-4bd4-a045-8536cbce6cbb">
+    </UnitTestResult>
+    <UnitTestResult executionId="7866e981-8327-4964-b581-5f2860ea7a50" testId="d894f7a2-fd75-4cd9-d87b-cb056685103c" testName="TestLenBox" computerName="TOSHIBA" duration="00:00:00.0004963" startTime="2015-04-01T22:32:08.9907904+06:00" endTime="2015-04-01T22:32:08.9967907+06:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7866e981-8327-4964-b581-5f2860ea7a50">
+    </UnitTestResult>
+    <UnitTestResult executionId="51ce699c-93c4-44d0-9c4b-4223778e43d6" testId="f52cb70e-b941-5f49-3b0f-9690394636c8" testName="TestDiamBox" computerName="TOSHIBA" duration="00:00:00.0006688" startTime="2015-04-01T22:32:08.9997909+06:00" endTime="2015-04-01T22:32:09.0067913+06:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="51ce699c-93c4-44d0-9c4b-4223778e43d6">
+    </UnitTestResult>
+  </Results>
+</TestRun>

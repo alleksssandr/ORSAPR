@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="C:\Users\game\Desktop\ОРСАПР\Motor\Motor\MotorTest\bin\Debug\MotorTest.dll" total="24" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2015-04-09" time="16:40:45">
+  <environment nunit-version="2.6.4.14350" clr-version="2.0.50727.5485" os-version="Microsoft Windows NT 6.1.7601 Service Pack 1" platform="Win32NT" cwd="C:\Users\game\Downloads\NUnit-2.6.4\bin" machine-name="TOSHIBA" user="game" user-domain="TOSHIBA" />
+  <culture-info current-culture="ru-RU" current-uiculture="ru-RU" />
+  <test-suite type="Assembly" name="C:\Users\game\Desktop\ОРСАПР\Motor\Motor\MotorTest\bin\Debug\MotorTest.dll" executed="True" result="Success" success="True" time="0.338" asserts="0">
+    <results>
+      <test-suite type="Namespace" name="TestMotor" executed="True" result="Success" success="True" time="0.316" asserts="0">
+        <results>
+          <test-suite type="TestFixture" name="Tests" executed="True" result="Success" success="True" time="0.266" asserts="0">
+            <results>
+              <test-suite type="ParameterizedTest" name="TestsValidParametrs" executed="True" result="Success" success="True" time="0.255" asserts="0">
+                <results>
+                  <test-case name="TestMotor.Tests.Негативное тестирование выхода за границы максимально допустимого параментра ширина коробки выводов" executed="True" result="Success" success="True" time="0.144" asserts="0" />
+                  <test-case name="TestMotor.Tests.Положительное тестирование минимально допустимых параментров построения мотора" executed="True" result="Success" success="True" time="0.002" asserts="0" />
+                  <test-case name="TestMotor.Tests.Негативное тестирование выхода за границы максимально допустимого параментра количество элементов радиатора" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                  <test-case name="TestMotor.Tests.Негативное тестирование выхода за границы минимально допустимого параментра длина корпуса мотора" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                  <test-case name="TestMotor.Tests.Негативное тестирование выхода за границы минимально допустимого параментра диаметр корпуса мотора" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                  <test-case name="TestMotor.Tests.Негативное тестирование выхода за границы минимально допустимого параментра длина вала" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                  <test-case name="TestMotor.Tests.Негативное тестирование выхода за границы минимально допустимого параментра диаметр вала" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                  <test-case name="TestMotor.Tests.Негативное тестирование выхода за границы минимально допустимого параментра длина фиксирующей понки" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                  <test-case name="TestMotor.Tests.Негативное тестирование выхода за границы минимально допустимого параментра ширина коробки выводов" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                  <test-case name="TestMotor.Tests.Негативное тестирование выхода за границы минимально допустимого параментра длина коробки выводов" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                  <test-case name="TestMotor.Tests.Негативное тестирование выхода за границы минимально допустимого параментра высота коробки выводов" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                  <test-case name="TestMotor.Tests.Негативное тестирование выхода за границы минимально допустимого параментра диаметр отверстия коробки выводов" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                  <test-case name="TestMotor.Tests.Негативное тестирование выхода за границы минимально допустимого параментра количество элементов вывода" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                  <test-case name="TestMotor.Tests.Негативное тестирование выхода за границы минимально допустимого параментра количество элементов радиатора" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                  <test-case name="TestMotor.Tests.Негативное тестирование выхода за границы максимально допустимого параментра длина корпуса мотора" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                  <test-case name="TestMotor.Tests.Негативное тестирование выхода за границы максимально допустимого параментра диаметр корпуса мотора" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                  <test-case name="TestMotor.Tests.Негативное тестирование выхода за границы максимально допустимого параментра длина вала" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                  <test-case name="TestMotor.Tests.Негативное тестирование выхода за границы максимально допустимого параментра диаметр вала" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                  <test-case name="TestMotor.Tests.Негативное тестирование выхода за границы максимально допустимого параментра длина фиксирующей понки" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                  <test-case name="TestMotor.Tests.Положительное тестирование максимально допустимых параментров построения мотора" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="TestMotor.Tests.Негативное тестирование выхода за границы максимально допустимого параментра длина коробки выводов" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                  <test-case name="TestMotor.Tests.Негативное тестирование выхода за границы максимально допустимого параментра высота коробки выводов" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                  <test-case name="TestMotor.Tests.Негативное тестирование выхода за границы максимально допустимого параментра диаметр отверстия коробки выводов" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                  <test-case name="TestMotor.Tests.Негативное тестирование выхода за границы максимально допустимого параментра количество элементов вывода" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>
